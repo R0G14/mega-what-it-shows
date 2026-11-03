@@ -1,4 +1,4 @@
-# Draft issue: booking-v3 date hint conflicts with day-first form parsing
+# Booking-v3 date hint conflicts with day-first form parsing
 
 **Reports covered: 33**
 

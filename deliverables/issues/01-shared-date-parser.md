@@ -1,4 +1,4 @@
-# Draft issue: Day-first tenant dates are flipped by the shared parser
+# Day-first tenant dates are flipped by the shared parser
 
 **Reports covered: 379**
 
