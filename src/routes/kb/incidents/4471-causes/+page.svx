@@ -1,0 +1,36 @@
+---
+layout: runbook
+title: '#4471 · two date problems, not one'
+owner: support desk
+status: draft
+reviewed: 2026-11-03
+signature: R0G14
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+This is a snapshot of the export through 4 October 2026, not a live queue. Report IDs are
+deduplicated before the causes are counted. The tenant's locale and booking form establish the
+cause; intake tags are only guesses.
+
+## Cause breakdown
+
+<CauseTable ticket={4471} />
+
+The parser row is the shared parser defect: it reads dates month first for day-first tenants.
+The booking-v3 hint row is a separate form defect: its `MM/DD/YYYY` instruction conflicts with
+the day-first order used to interpret submissions. File one ticket for each cause; fixing one
+path does not correct the other.
+
+## Reports over time
+
+<QueueTimeline ticket={4471} />
+
+Five reports listed in the desk notes describe a one-day move and remain in the parser group;
+they are not an additional cause.
+
+<RenderStamp {signature} />

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>#4471 · two date problems, not one · support kb</title>
+    <style>
+      :root { --bg: #fbfaf7; --fg: #1d1d1b; --muted: #6b6a66; --line: #e3e0d8; --accent: #2f6f5e; --warn: #b4501f; --warn-bg: #fbeee6; --mono: ui-monospace, 'Cascadia Code', Menlo, monospace; }
+      @media (prefers-color-scheme: dark) { :root { --bg: #171716; --fg: #ecebe6; --muted: #9c9a93; --line: #34332f; --accent: #6fbfa6; --warn: #f0905d; --warn-bg: #3a2418; } }
+      body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, sans-serif; }
+      .kb { max-width: 760px; margin: 0 auto; padding: 2rem 16px 4rem; }
+      .crumb { font: 0.8rem var(--mono); text-decoration: none; color: var(--muted); }
+      h1 { margin: 0.25rem 0 0.5rem; line-height: 1.2; }
+      .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; color: var(--muted); font-size: 0.85rem; margin: 0; }
+      .status { border: 1px solid var(--line); border-radius: 99px; padding: 0 0.6rem; }
+      table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.92rem; }
+      th, td { border-bottom: 1px solid var(--line); padding: 0.35rem 0.5rem; text-align: left; }
+      code { font-family: var(--mono); font-size: 0.88em; }
+      .sum { font-size: 1.1rem; }
+      .tags, .note, figcaption { color: var(--muted); font-size: 0.85em; }
+      .wrong td { background: var(--warn-bg); }
+      .wrong td:last-child { color: var(--warn); font-weight: 600; }
+      svg { width: 100%; max-width: 640px; }
+      .in { fill: var(--warn); }
+      .merged { fill: var(--accent); }
+      svg text { font: 8px var(--mono); fill: var(--muted); text-anchor: middle; }
+      figcaption { font-size: 0.85rem; }
+      .key { display: inline-block; width: 0.7em; height: 0.7em; border-radius: 2px; }
+      .key.in { background: var(--warn); }
+      .key.merged { background: var(--accent); }
+      footer { margin-top: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+      .stamp { margin: 2rem 0 0; font: 0.85rem var(--mono); color: var(--muted); }
+      .stamp b { color: var(--accent); letter-spacing: 0.04em; }
+    </style>
+  </head>
+  <body>
+    <div class="kb">
+      <header>
+        <a class="crumb" href="#">support desk · kb</a>
+        <h1>#4471 · two date problems, not one</h1>
+        <p class="meta">
+          <span>owner <b>support desk</b></span>
+          <span class="status">draft</span>
+          <span>reviewed 2026-11-03 · 0 days ago</span>
+        </p>
+      </header>
+      <main>
+        <p>This is a snapshot of the export through 4 October 2026, not a live queue. Report IDs are
+          deduplicated before the causes are counted. The tenant's locale and booking form establish the
+          cause; intake tags are only guesses.</p>
+
+        <h2>Cause breakdown</h2>
+        <p class="sum"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p>
+        <table>
+          <thead>
+            <tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>parser</code></td><td>379</td><td class="tags">parser ×356 · hint ×23</td><td>11</td>
+              <td>2026-04-01 → 2026-10-04</td><td>#4471</td>
+            </tr>
+            <tr class="wrong">
+              <td><code>hint</code></td><td>33</td><td class="tags">hint ×18 · parser ×15</td><td>3</td>
+              <td>2026-04-17 → 2026-09-22</td><td>not this ticket — no ticket of its own</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p>
+
+        <p>The parser row is the shared parser defect: it reads dates month first for day-first tenants.
+          The booking-v3 hint row is a separate form defect: its <code>MM/DD/YYYY</code> instruction
+          conflicts with the day-first order used to interpret submissions. File one ticket for each
+          cause; fixing one path does not correct the other.</p>
+
+        <h2>Reports over time</h2>
+        <figure>
+          <svg id="timeline" viewBox="0 0 648 140" role="img" aria-label="reports received and merged into #4471, per week"></svg>
+          <figcaption><span class="key in"></span> received · <span class="key merged"></span> merged into #4471 · per week</figcaption>
+        </figure>
+
+        <p>Five reports listed in the desk notes describe a one-day move and remain in the parser
+          group; they are not an additional cause.</p>
+        <p class="stamp">desk ref <b>DR-00SR-DQ9S</b></p>
+      </main>
+      <footer>Pages are written by people. Tables and charts are built from data at render time.</footer>
+    </div>
+    <script>
+      const weekly = [
+        [7, 0], [11, 0], [14, 0], [19, 0], [16, 0], [12, 0], [8, 0],
+        [12, 0], [14, 0], [17, 0], [16, 0], [17, 0], [11, 0], [15, 189],
+        [19, 18], [17, 18], [15, 15], [19, 19], [8, 8], [15, 15], [20, 20],
+        [14, 14], [21, 21], [20, 20], [15, 15], [25, 23], [15, 17]
+      ];
+      const svg = document.querySelector('#timeline');
+      const start = Date.parse('2026-03-30T00:00:00Z');
+      const week = 7 * 86_400_000;
+      const max = 189;
+      weekly.forEach(([received, merged], i) => {
+        const bars = [
+          ['in', i * 24 + 2, received],
+          ['merged', i * 24 + 12, merged]
+        ];
+        for (const [kind, x, count] of bars) {
+          const height = count / max * 100;
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('class', kind);
+          rect.setAttribute('x', String(x));
+          rect.setAttribute('y', String(110 - height));
+          rect.setAttribute('width', '9');
+          rect.setAttribute('height', String(height));
+          svg.append(rect);
+        }
+        if (i % 4 === 0) {
+          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.setAttribute('x', String(i * 24 + 12));
+          text.setAttribute('y', '128');
+          text.textContent = new Date(start + i * week).toISOString().slice(5, 10);
+          svg.append(text);
+        }
+      });
+    </script>
+  </body>
+</html>
